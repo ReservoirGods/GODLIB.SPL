@@ -178,6 +178,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\BOX.PRJ"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
