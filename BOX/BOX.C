@@ -45,9 +45,6 @@ void	Box_Render( void );
 #  DATA
 ################################################################################### */
 
-void *			gpScreenMem;
-U16 *			gpPhysic;
-sGraphicCanvas	gGraphic;
 U16				gMyPalette[ 16 ] =
 {
 	0x000,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,
@@ -61,7 +58,7 @@ U16				gMyPalette[ 16 ] =
 /*-----------------------------------------------------------------------------------*
 * FUNCTION : main( void )
 * ACTION   : it begins  ...
-* CREATION : 18.02.2002 PNK
+* CREATION : 02.01.2015 PNK
 *-----------------------------------------------------------------------------------*/
 
 S16	GodLib_Game_Main( S16 aArgCount, char * apArgs[] )
