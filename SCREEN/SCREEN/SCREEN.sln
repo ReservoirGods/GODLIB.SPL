@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SCREEN", "SCREEN.vcproj", "{9E57B6EE-3C7B-4D48-87DB-9A9C5C486C3A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7B28A824-DA6E-4572-9954-9DBA6A17342A} = {7B28A824-DA6E-4572-9954-9DBA6A17342A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GODLIB", "..\..\..\GODLIB\GODLIB.vcproj", "{7B28A824-DA6E-4572-9954-9DBA6A17342A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E57B6EE-3C7B-4D48-87DB-9A9C5C486C3A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9E57B6EE-3C7B-4D48-87DB-9A9C5C486C3A}.Debug|Win32.Build.0 = Debug|Win32
+		{9E57B6EE-3C7B-4D48-87DB-9A9C5C486C3A}.Release|Win32.ActiveCfg = Release|Win32
+		{9E57B6EE-3C7B-4D48-87DB-9A9C5C486C3A}.Release|Win32.Build.0 = Release|Win32
+		{7B28A824-DA6E-4572-9954-9DBA6A17342A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7B28A824-DA6E-4572-9954-9DBA6A17342A}.Debug|Win32.Build.0 = Debug|Win32
+		{7B28A824-DA6E-4572-9954-9DBA6A17342A}.Release|Win32.ActiveCfg = Release|Win32
+		{7B28A824-DA6E-4572-9954-9DBA6A17342A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
