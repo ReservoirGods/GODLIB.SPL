@@ -75,7 +75,7 @@ void	Hardware_DeInit( void )
 {
 	IKBD_DeInit();
 	Vbl_DeInit();
-	System_DeInit();	
+	System_DeInit();
 }
 
 
