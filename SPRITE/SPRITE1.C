@@ -78,6 +78,7 @@ void	Test_Loop( void )
 	S16				lAddX,lAddY;
 	U16				lScreenIndex = 0;
 	sSprite *		lpSprite;
+	U16 *			lpMsk;
 
 	Screen_Init( 320, 200, eGRAPHIC_COLOURMODE_4PLANE, eSCREEN_SCROLL_NONE );
 
@@ -96,15 +97,29 @@ void	Test_Loop( void )
 		lAddX  = 1;
 		lAddY  = 1;
 
-		lpSprite = Sprite_Create(
+		/* generate a mask for the sprite	*/
+		/* when using tools pipeline, this is generally done with the MASKMAKE tool, and the sprite is constructed with BSBMAKER */
+
+		lpMsk = Sprite_MaskCreate(
 			&gpPicture->mPixels[ 0 ],	/* source graphics */
-			&gpPicture->mPixels[ 0 ],	/* source mask */
 			16,	/* width */
 			16,	/* height */
 			4,	/* planes */
-			0,	/* mask planes */
+			4,	/* mask planes */
 			0	/* opaque flag */
 			);
+
+		lpSprite = Sprite_Create(
+			&gpPicture->mPixels[ 0 ],	/* source graphics */
+			lpMsk,	/* source mask */
+			16,	/* width */
+			16,	/* height */
+			4,	/* planes */
+			4,	/* mask planes */
+			0	/* opaque flag */
+			);
+
+		Sprite_MaskDestroy( lpMsk );
 
 		while( !IKBD_GetKeyStatus(eIKBDSCAN_SPACE) )
 		{
@@ -122,7 +137,15 @@ void	Test_Loop( void )
 			lPosSaved[ lScreenIndex ] = lPos;
 			Screen_GetpLogicGraphic()->mpClipFuncs->DrawBox( Screen_GetpLogicGraphic(), &lRect, 0 );
 
-
+#if 0
+			lRect.mY=0;
+			lRect.mWidth = 1;
+			lRect.mHeight = 200;
+			for( lRect.mX=0; lRect.mX<320; lRect.mX+=10 )
+			{
+				Screen_GetpLogicGraphic()->mpClipFuncs->DrawBox( Screen_GetpLogicGraphic(), &lRect, 2 );
+			}
+#endif 
 			/* draw new sprite */
 
 			Screen_GetpLogicGraphic()->mpClipFuncs->DrawSprite(
@@ -132,7 +155,6 @@ void	Test_Loop( void )
 
 
 			/* calculate new sprite pos */
-
 			if( lAddX > 0 )
 			{
 				lPos.mX++;
@@ -170,7 +192,6 @@ void	Test_Loop( void )
 					lAddY  = 1;
 				}
 			}
-
 		}
 	}
 
