@@ -24,9 +24,9 @@ MUSIC.TOS
 ;	OPTIONS
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.C [ -8 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. ]
+.C [ -8 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. -NOUT ]
 .L [ -F -G ]
-.S [ -1 -2 -8 -S -Y ]
+.S [ -1 -2 -8 -S -Y -NOUT ]
 
 =
 
