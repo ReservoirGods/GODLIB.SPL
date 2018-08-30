@@ -32,6 +32,7 @@ void	Test_Loop( void );
 void	Test_HelpCli( const char * apArgs );
 void	Test_NumberCli( const char * apArgs );
 void	Test_TosCli( const char * apArgs );
+void	Test_Quit( const char * apArgs );
 
 
 /* ###################################################################################
@@ -86,13 +87,13 @@ void	Test_Loop( void )
 	Cli_CmdInit( "help",   Test_HelpCli   );
 	Cli_CmdInit( "number", Test_NumberCli );
 	Cli_CmdInit( "tos",    Test_TosCli    );
+	Cli_CmdInit( "quit",   Test_Quit      );
 
 	Cli_PrintLine( "GodLib CLI" );
 	Cli_PrintLine( "" );
-	Cli_PrintLine( "cmds: help, number, tos" );
+	Cli_PrintLine( "cmds: help, number, tos, quit" );
 
 	Cli_Main();
-
 
 	Cli_DeInit();
 
@@ -146,5 +147,16 @@ void	Test_TosCli( const char * apArgs )
 	Cli_PrintLine( lString );
 }
 
+/*-----------------------------------------------------------------------------------*
+* FUNCTION : Test_TosCli( const char * apArgs )
+* ACTION   : Test_TosCli
+* CREATION : 03.01.2003 PNK
+*-----------------------------------------------------------------------------------*/
+
+void	Test_Quit( const char * apArgs )
+{
+	(void)apArgs;
+	Cli_Main_ExitRequest();
+}
 
 /* ################################################################################ */
