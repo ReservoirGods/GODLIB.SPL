@@ -1,0 +1,2 @@
+.SampleName="CLI"
+#include "..\..\sample.bff"

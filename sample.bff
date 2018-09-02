@@ -1,0 +1,75 @@
+.ProjectDir='$_WORKING_DIR_$\..'
+.ExePath="^$(SolutionDir)\..\^$(ProjectName)-MSVC9-x86-^$(Configuration).exe"
+.ExeWorkingDir="^$(SolutionDir)\.."
+.FastBuildDir = "..\..\..\TOOLS.RG\FASTBUILD\Windows-x64-v0.96"
+.GodLibDir="$ProjectDir$\..\..\GODLIB"
+
+#include	"$GodLibDir$\FAST\pc.bff"
+#include	"$GodLibDir$\FAST\lib.bff"
+#include	"$GodLibDir$\FAST\godlib.bff"
+
+.ProjectName='$SampleName$'
+
+#include	"$GodLibDir$\FAST\lib.bff"
+
+ForEach( .ArchitectureCompilerConfig in .ArchitectureCompilerConfigList )
+{
+	Using( .ArchitectureCompilerConfig )
+	.Uid='$CompilerName$-$ArchitectureName$-$ConfigName$'
+
+	.Librarian 	= '$ToolsBasePath$\lib.exe'
+	.Linker 	= '$ToolsBasePath$\link.exe'	
+
+	ObjectList( '$ProjectName$-obj-$Uid$' )
+	{
+	// Include paths
+	//------------------------------------------------------------------------------
+		.BaseIncludePaths   = ' /I"..\..\.."'
+							+ ' /I"$CppCompilerDir$/Include"'
+		.CompilerOptions    + .BaseIncludePaths
+		.CompilerInputPath = '..'
+		.CompilerInputPattern ='*.C'
+		.CompilerOutputPath= 'Out\$ProjectName$-obj-$Uid$\'
+
+	}
+
+	Executable( '$ProjectName$-exe-$Uid$' )
+	{
+		.LinkerOutput	= '..\$ProjectName$-$Uid$.exe'
+		.Libraries 		= { '$ProjectName$-obj-$Uid$', 'godlib-$Uid$' }
+	}
+}
+
+
+VCXProject( '$ProjectName$_vcx' )
+{
+	Using( .VCXProjectCommon )
+	.ProjectBasePath = '..'
+	.ProjectInputPaths = '..'
+	.ProjectOutput 	= '$ProjectName$.vcxproj'
+
+    .LocalDebuggerCommand='^$(SolutionDir)\..\^$(ProjectName)-MSVC9-^$(Configuration).exe'
+	.LocalDebuggerWorkingDirectory='^$(SolutionDir)..'
+
+}
+
+
+VSSolution( 'sln' )
+{
+	.SolutionBuildProject = '$ProjectName$_vcx'
+	.SolutionOutput = '$ProjectName$.sln'
+	.SolutionProjects = { 'godlib_vcx', '$ProjectName$_vcx' }
+	.SolutionConfigs=.ProjectConfigs
+
+	.Deps =
+	[
+	  .Projects      = { '$ProjectName$_vcx', 
+	                     'godlib_vcx' } // F5 with either as the active project will perform a Solution Build (via "All")
+	  .Dependencies  = { '$ProjectName$_vcx' }
+	]
+	.SolutionDependencies = { .Deps }
+
+}
+
+Alias( '$SampleName$-Debug') { .Targets = '$SampleName$-exe-MSVC9-x86-Debug'}
+
