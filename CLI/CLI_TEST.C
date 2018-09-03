@@ -59,6 +59,9 @@ U16				gMyPalette[ 16 ] =
 
 S16	GodLib_Game_Main( S16 aArgCount, char * apArgs[] )
 {
+	(void)aArgCount;
+	(void)apArgs;
+
 	GemDos_Super( 0 );
 
 	Platform_Init();
@@ -109,6 +112,7 @@ void	Test_Loop( void )
 
 void	Test_HelpCli( const char * apArgs )
 {
+	(void)apArgs;
 	Cli_PrintLine( "you asked for help!" );
 }
 
@@ -142,6 +146,7 @@ void	Test_TosCli( const char * apArgs )
 {
 	char	lString[ 128 ];
 	
+	(void)apArgs;
 	sprintf( lString, "TOS Verion : %x", System_GetTosVersion() );
 
 	Cli_PrintLine( lString );

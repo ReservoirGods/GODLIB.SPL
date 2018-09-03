@@ -41,6 +41,9 @@ void	Joystick_PacketDisplay( const U8 aPacket );
 
 S16	GodLib_Game_Main( S16 aArgCount, char * apArgs[] )
 {
+	(void)aArgCount;
+	(void)apArgs;
+	
 	GemDos_Super( 0 );
 
 	Hardware_Init();
