@@ -1,5 +1,5 @@
 {
-    #define USING_VS2013
+    #define USING_VS2010
 
     .ProjectDir='$_WORKING_DIR_$\..'
     .ExePath="^$(SolutionDir)\..\^$(ProjectName)-MSVC9-x86-^$(Configuration).exe"
