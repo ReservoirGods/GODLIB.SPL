@@ -1,2 +1,3 @@
+#define USING_VS2008
 .SampleName="BOX"
-#include "..\..\sample.bff"
+#include "..\..\sample2.bff"
