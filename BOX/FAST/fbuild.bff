@@ -1,3 +1,2 @@
-#define USING_VS2012
 .SampleName="BOX"
-#include "..\..\sample2.bff"
+#include "..\..\sample.bff"

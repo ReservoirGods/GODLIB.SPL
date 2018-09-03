@@ -1,3 +1,2 @@
-#define USING_VS2008
 .SampleName="COOKIJAR"
-#include "..\..\sample2.bff"
+#include "..\..\sample.bff"

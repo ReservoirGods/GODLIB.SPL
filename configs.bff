@@ -1,7 +1,7 @@
-.ProjectConfigTarget_X86Debug        = [ Using( .ProjectCommonConfig_X86Debug )           .Target = '$ProjectName$-X86-Debug' ]
-.ProjectConfigTarget_X86Profile      = [ Using( .ProjectCommonConfig_X86Profile )         .Target = '$ProjectName$-X86-Profile' ]
-.ProjectConfigTarget_X86Release      = [ Using( .ProjectCommonConfig_X86Release )         .Target = '$ProjectName$-X86-Release' ]
-//.ProjectConfigTarget_X86ClangDebug   = [ Using( .ProjectCommonConfig_X86ClangDebug )      .Target = '$ProjectName$-X86Clang-Debug' ]
+.ProjectConfigTarget_X86Debug        = [ Using( .ProjectCommonConfig_X86Debug )           .Target = '$ProjectName$-exe-X86-Debug' ]
+.ProjectConfigTarget_X86Profile      = [ Using( .ProjectCommonConfig_X86Profile )         .Target = '$ProjectName$-exe-X86-Profile' ]
+.ProjectConfigTarget_X86Release      = [ Using( .ProjectCommonConfig_X86Release )         .Target = '$ProjectName$-exe-X86-Release' ]
+.ProjectConfigTarget_X86ClangDebug   = [ Using( .ProjectCommonConfig_X86ClangDebug )      .Target = '$ProjectName$-X86Clang-Debug' ]
 .ProjectConfigTarget_X86ClangProfile = [ Using( .ProjectCommonConfig_X86ClangProfile )    .Target = '$ProjectName$-X86Clang-Profile' ]
 .ProjectConfigTarget_X86ClangRelease = [ Using( .ProjectCommonConfig_X86ClangRelease )    .Target = '$ProjectName$-X86Clang-Release' ]
 

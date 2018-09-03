@@ -1,17 +1,21 @@
-.ProjectDir='$_WORKING_DIR_$\..'
-.ExePath="^$(SolutionDir)\..\^$(ProjectName)-MSVC9-x86-^$(Configuration).exe"
-.ExeWorkingDir="^$(SolutionDir)\.."
-.FastBuildDir = "..\..\..\TOOLS.RG\FASTBUILD\Windows-x64-v0.96"
-.GodLibDir="$ProjectDir$\..\..\GODLIB"
-.DirectXPath="C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)"
-
-#include    "$GodLibDir$\FAST\Windows.bff"
-#include	"$GodLibDir$\FAST\VisualStudio.bff"
-#include	"$GodLibDir$\FAST\Base.bff"
-
-.ExeConfigs   = { .X86DebugConfig, .X86ProfileConfig, .X86ReleaseConfig }
-
 {
+    #define USING_VS2013
+
+    .ProjectDir='$_WORKING_DIR_$\..'
+    .ExePath="^$(SolutionDir)\..\^$(ProjectName)-MSVC9-x86-^$(Configuration).exe"
+    .ExeWorkingDir="^$(SolutionDir)\.."
+    .FastBuildDir = "..\..\..\TOOLS.RG\FASTBUILD\Windows-x64-v0.96"
+    .GodLibDir="$ProjectDir$\..\..\GODLIB"
+    .DirectXPath="C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)"
+
+    #include    "$GodLibDir$\FAST\Windows.bff"
+    #include    "$GodLibDir$\FAST\VisualStudio.bff"
+    #include    "$GodLibDir$\FAST\Base.bff"
+
+    .ExeConfigs   = { .X86DebugConfig, .X86ProfileConfig, .X86ReleaseConfig }
+
+
+
     .ProjectName        = '$SampleName$'
     .ProjectPath        = '.\'
 
@@ -21,7 +25,7 @@
 
         .OutputBase + '\$Platform$-$Config$'
 
-        ObjectList( '$ProjectName$-Lib-$Platform$-$Config$' )
+        ObjectList( '$ProjectName$-obj-$Platform$-$Config$' )
         {
             .BaseIncludePaths       = ' /I"..\..\.."'
             .CompilerOptions        + .BaseIncludePaths
@@ -48,7 +52,7 @@
         Executable( '$ProjectName$-Exe-$Platform$-$Config$' )
         {
 
-            .Libraries      = { '$ProjectName$-Lib-$Platform$-$Config$', 'godlib-$Platform$-$Config$' }
+            .Libraries      = { '$ProjectName$-obj-$Platform$-$Config$', 'godlib-$Platform$-$Config$' }
 
             .LinkerOutput   = '../$ProjectName$-$Platform$-$Config$$ExeExtension$'
             .LinkerOptions  + ' /SUBSYSTEM:WINDOWS'
@@ -66,14 +70,9 @@
 
     // Aliases
     //--------------------------------------------------------------------------
-// Generates Alias targets for .ProjectName
-
-// Per-Config
-#if __WINDOWS__
-Alias( '$ProjectName$-Debug' )           { .Targets = { '$ProjectName$-X86-Debug',   '$ProjectName$-X64-Debug', '$ProjectName$-X86Clang-Debug', '$ProjectName$-X64Clang-Debug' } }
-Alias( '$ProjectName$-Profile' )         { .Targets = { '$ProjectName$-X86-Profile', '$ProjectName$-X64-Profile', '$ProjectName$-X86Clang-Profile', '$ProjectName$-X64Clang-Profile' } }
-Alias( '$ProjectName$-Release' )         { .Targets = { '$ProjectName$-X86-Release', '$ProjectName$-X64-Release', '$ProjectName$-X86Clang-Release', '$ProjectName$-X64Clang-Release' } }
-#endif
+    Alias( '$ProjectName$-Debug' )           { .Targets = { '$ProjectName$-exe-X86-Debug' } }
+    Alias( '$ProjectName$-Profile' )         { .Targets = { '$ProjectName$-exe-X86-Profile' } }
+    Alias( '$ProjectName$-Release' )         { .Targets = { '$ProjectName$-exe-X86-Release' } }
 
 
     // Visual Studio Project Generation
