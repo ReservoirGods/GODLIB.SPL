@@ -24,6 +24,7 @@ CALL :buildIt COOKIJAR %*
 CALL :buildIt JAGPAD %*
 CALL :buildIt JOY %*
 CALL :buildIt MOUSE %*
+CALL :buildIt MUSIC %*
 CALL :buildIt PICSHOW %*
 CALL :buildIt SCREEN %*
 CALL :buildIt SCRNSWAP %*
