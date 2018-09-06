@@ -1,9 +1,9 @@
 /*************************************************************************************
  * GodLib Example Progam Suite
  * 
- * Demonstrates basic music playback
+ * Demonstrates audio sample playback
  *
- * PINK 11.08.18
+ * PINK 09.05.18
  *************************************************************************************
 */
 
@@ -93,15 +93,48 @@ void	Hardware_DeInit( void )
 * CREATION : 11.08.2018 PNK
 *-----------------------------------------------------------------------------------*/
 
-void	Test_Loop( void )
+void	Menu_Print( U8 aTuneIndex )
 {
 	/* encode screen clear and cursor off into string using VT-52 codes */
 	char *	lpString = "\033E\033f-GodLib Music Sample-\n\r";
-	char *	lpT1 = "*[F1] - TUNE 1\n\r";
-	char *	lpT2 = " [F2] - TUNE 2\n\r";
+	char *	lpT1 = "*[F1] - TUNE 1\033q\n\r";
+	char *	lpT2 = " [F2] - TUNE 2\033q\n\r";
 	char *	lpQ = " [Space] - Quit\n\r";
+
+	if( aTuneIndex )
+	{
+		lpT1[0] = ' ';
+		lpT2[0] = '*';
+	}
+	else
+	{
+		lpT1[0] = '*';
+		lpT2[0] = ' ';		
+	}
+
+	/* print information */
+	GemDos_Cconws( lpString );
+	if( !aTuneIndex )
+		GemDos_Cconws( "\033p");
+	GemDos_Cconws( lpT1 );
+	if( aTuneIndex )
+		GemDos_Cconws( "\033p");
+	GemDos_Cconws( lpT2 );
+	GemDos_Cconws( lpQ );
+
+}
+
+/*-----------------------------------------------------------------------------------*
+* FUNCTION : Test_Loop( void )
+* ACTION   : Test_Loop
+* CREATION : 11.08.2018 PNK
+*-----------------------------------------------------------------------------------*/
+
+void	Test_Loop( void )
+{
 	void * lpVoiceSet;
 	void * lpTunes[ 2 ];
+	U8	lTuneIndex = 0;
 	U8	lExitFlag = 0;
 
 	/* initialise Sid Sound Designer player */
@@ -121,11 +154,7 @@ void	Test_Loop( void )
 	{
 		U8 lKey;
 
-		/* print information */
-		GemDos_Cconws( lpString );
-		GemDos_Cconws( lpT1 );
-		GemDos_Cconws( lpT2 );
-		GemDos_Cconws( lpQ );
+		Menu_Print( lTuneIndex );
 
 		/* wait for key */
 		while( !IKBD_GetKbdBytesWaiting());
@@ -137,9 +166,7 @@ void	Test_Loop( void )
 			Ssd_Stop();
 			Ssd_Start( lpVoiceSet, lpTunes[0]);
 
-			/* update text display to show played tune */
-			lpT1[0]='*';
-			lpT2[0]=' ';
+			lTuneIndex = 0;
 		}
 		else if( eIKBDSCAN_F2 == lKey )
 		{
@@ -147,9 +174,7 @@ void	Test_Loop( void )
 			Ssd_Stop();
 			Ssd_Start( lpVoiceSet, lpTunes[1]);
 
-			/* update text display to show played tune */
-			lpT1[0]=' ';
-			lpT2[0]='*';
+			lTuneIndex = 1;
 		}
 		else if( eIKBDSCAN_SPACE == lKey )
 		{
