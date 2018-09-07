@@ -18,6 +18,7 @@ pushd X:
 
 cd GODLIB.SPL
 
+CALL :buildIt AUDIO %*
 CALL :buildIt BOX %*
 CALL :buildIt CLI %*
 CALL :buildIt COOKIJAR %*
