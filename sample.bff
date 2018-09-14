@@ -74,6 +74,24 @@
     Alias( '$ProjectName$-Profile' )         { .Targets = { '$ProjectName$-exe-X86-Profile' } }
     Alias( '$ProjectName$-Release' )         { .Targets = { '$ProjectName$-exe-X86-Release' } }
 
+    .CppFileType = 
+    [
+      .FileType = "CppForm"
+      .Pattern = "*\\*.C"
+    ]
+
+    .BffFileType = 
+    [
+      .FileType = "CppForm"
+      .Pattern = "*\\*.bff"
+    ]
+
+    .PrjFileType = 
+    [
+      .FileType = "CppForm"
+      .Pattern = "..\\*.PRJ"
+    ]
+
 
     // Visual Studio Project Generation
     //--------------------------------------------------------------------------
@@ -84,6 +102,8 @@
         .ProjectBasePath    = '..'
         .ProjectInputPaths  = '..'
         .ProjectOutput      = '$ProjectName$.vcxproj'
+
+        .ProjectFileTypes = { .CppFileType, .BffFileType, .PrjFileType }
 
         .LocalDebuggerCommand           ='^$(SolutionDir)\..\^$(ProjectName)-^$(Configuration).exe'
         .LocalDebuggerWorkingDirectory  ='^$(SolutionDir)..'
