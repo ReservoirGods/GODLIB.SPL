@@ -1,10 +1,10 @@
 {
-    #define USING_VS2010
+    #define USING_VS2012
 
     .ProjectDir='$_WORKING_DIR_$\..'
     .ExePath="^$(SolutionDir)\..\^$(ProjectName)-MSVC9-x86-^$(Configuration).exe"
     .ExeWorkingDir="^$(SolutionDir)\.."
-    .FastBuildDir = "..\..\..\TOOLS.RG\FASTBUILD\Windows-x64-v0.96"
+    .FastBuildDir = "..\..\..\TOOLS.RG\FASTBUILD\Windows-x64-v0.96-RG"
     .GodLibDir="$ProjectDir$\..\..\GODLIB"
     .DirectXPath="C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)"
 
