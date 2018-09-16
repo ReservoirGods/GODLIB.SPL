@@ -12,9 +12,9 @@ pushd ..
 
 set mypath=%cd%
 
-subst X: %mypath%
+::subst X: %mypath%
 
-pushd X:
+::pushd X:
 
 cd GODLIB.SPL
 
@@ -33,7 +33,7 @@ CALL :buildIt SPRITE %*
 
 popd
 
-subst X: /D
+::subst X: /D
 
 popd
 
