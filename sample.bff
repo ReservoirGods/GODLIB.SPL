@@ -8,9 +8,11 @@
     .GodLibDir="$ProjectDir$\..\..\GODLIB"
     .DirectXPath="C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)"
 
-    #include    "$GodLibDir$\FAST\Windows.bff"
+    .VS_Name="VS_2015"
+
     #include    "$GodLibDir$\FAST\VisualStudio.bff"
     #include    "$GodLibDir$\FAST\Base.bff"
+
 
     .ExeConfigs   = { .X86DebugConfig, .X86ProfileConfig, .X86ReleaseConfig }
 
@@ -57,9 +59,9 @@
             .LinkerOutput   = '../$ProjectName$-$Platform$-$Config$$ExeExtension$'
             .LinkerOptions  + ' /SUBSYSTEM:WINDOWS'
                             + ' kernel32.lib'
-                            + ' Ws2_32.lib'
+//                            + ' Ws2_32.lib'
                             + ' User32.lib'
-                            + .CRTLibs_Static
+//                            + .CRTLibs_Static
                             + ' d3dx9d.lib d3d9.lib d3dxof.lib dxguid.lib dinput8.lib'
                             + ' winmm.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib'
                             + ' gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib'

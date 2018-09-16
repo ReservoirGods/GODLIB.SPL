@@ -128,6 +128,7 @@ void	Test_NumberCli( const char * apArgs )
 	S32		lNum;
 	char	lString[ 128 ];
 
+	(void)apArgs;
 	lNum = Cli_GrabNumber( apArgs );
 
 	sprintf( lString, "your number is : %ld", lNum );
