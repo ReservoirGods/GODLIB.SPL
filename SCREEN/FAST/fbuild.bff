@@ -1,2 +1,2 @@
-.SampleName="SCREEN"
+.ProjectName="SCREEN"
 #include "..\..\sample.bff"

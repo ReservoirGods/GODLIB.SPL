@@ -1,2 +1,2 @@
-.SampleName="SCRNSWAP"
+.ProjectName="SCRNSWAP"
 #include "..\..\sample.bff"

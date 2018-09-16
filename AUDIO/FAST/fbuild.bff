@@ -1,2 +1,2 @@
-.SampleName="AUDIO"
+.ProjectName="AUDIO"
 #include "..\..\sample.bff"

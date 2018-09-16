@@ -1,2 +1,2 @@
-.SampleName="BOX"
+.ProjectName="BOX"
 #include "..\..\sample.bff"
