@@ -5,7 +5,7 @@
 :: We create a common base drive (X:) to allow fastbuild cache to be shared between projects
 
 @echo off
-setlocal
+::setlocal
 
 ::pushd ..
 ::set mypath=%cd%
@@ -13,7 +13,6 @@ setlocal
 ::pushd X:
 ::cd GODLIB.SPL
 
-@echo off
 pushd
 for /D %%i in (*) do (
 	if exist "%%i\FAST" (
@@ -24,9 +23,8 @@ for /D %%i in (*) do (
 )
 popd
 
-
 ::popd
 ::subst X: /D
 ::popd
 
-endlocal
+::endlocal
