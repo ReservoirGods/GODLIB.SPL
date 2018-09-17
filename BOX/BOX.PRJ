@@ -27,9 +27,10 @@ BOX.TOS
 ;	OPTIONS
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.C [ -8 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. -NOUT ]
+.C [ -8 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. ]
 .L [ -F -G ]
-.S [ -1 -2 -8 -S -Y -NOUT ]
+.S [ -1 -2 -8 -S -Y ]
+
 =
 
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -64,8 +65,8 @@ BOX.TOS
 ..\..\GODLIB\SCREEN\SCREEN.C
 ..\..\GODLIB\SYSTEM\SYSTEM.C
 ..\..\GODLIB\VBL\VBL.C
-..\..\GODLIB\VIDEO\VIDEO.C
 ..\..\GODLIB\VIDEO\VIDEL.C
+..\..\GODLIB\VIDEO\VIDEO.C
 ..\..\GODLIB\XBIOS\XBIOS.C
 
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

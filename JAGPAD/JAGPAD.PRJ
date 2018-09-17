@@ -25,9 +25,9 @@ JAGPAD.TOS
 ;	OPTIONS
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.C [ -8 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. -NOUT ]
+.C [ -8 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. ]
 .L [ -F -G ]
-.S [ -1 -2 -8 -S -Y -NOUT ]
+.S [ -1 -2 -8 -S -Y ]
 
 =
 
