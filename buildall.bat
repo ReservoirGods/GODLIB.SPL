@@ -13,7 +13,6 @@
 ::pushd X:
 ::cd GODLIB.SPL
 
-pushd
 for /D %%i in (*) do (
 	if exist "%%i\FAST" (
 		pushd "%%i\FAST"
@@ -21,7 +20,6 @@ for /D %%i in (*) do (
 		popd
 	)
 )
-popd
 
 ::popd
 ::subst X: /D

@@ -1,4 +1,3 @@
-setlocal
 set proj=%1
 
 shift
@@ -11,4 +10,3 @@ goto loop
 :afterloop
 
 ..\..\..\TOOLS.RG\FASTBUILD\Windows-x64-v0.96-RG\FBuild.exe -cache sln %proj%-Debug %params%
-endlocal
