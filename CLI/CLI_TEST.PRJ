@@ -26,9 +26,9 @@ CLI_TEST.TOS
 ;	OPTIONS
 ;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.C [ -8 -DdCLI=1 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. ]
+.C [ -DdCLI=1 -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. ]
 .L [ -F -G ]
-.S [ -1 -2 -8 -S -Y ]
+.S [ -1 -2 -S -Y ]
 
 =
 
