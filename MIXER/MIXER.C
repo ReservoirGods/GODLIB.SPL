@@ -30,6 +30,9 @@ void	Hardware_DeInit( void );
 
 void	Test_Loop( void );
 
+extern	void AudioMixer_TablesBuild();
+
+sAmixerConfig	gExampleMixerConfig;
 
 /* ###################################################################################
 #  CODE
@@ -45,7 +48,11 @@ S16	GodLib_Game_Main( S16 aArgCount, char * apArgs[] )
 {
 	(void)aArgCount;
 	(void)apArgs;
-	
+
+#ifndef dGODLIB_PLATFORM_ATARI
+	AudioMixer_TablesBuild();
+#endif
+
 	GemDos_Super( 0 );
 
 	Hardware_Init();
@@ -73,7 +80,7 @@ void	Hardware_Init( void )
 	Audio_Init();
 	AudioMixer_Init();
 	AudioMixer_Enable();
-
+	gExampleMixerConfig = *AudioMixer_GetpConfig();
 }
 
 
@@ -105,8 +112,7 @@ void	Menu_Print( void )
 	char *	lpString = "\033E\033f-GodLib Mixer Example-\n\r\n\r";
 	char *	lpT1 = " [F1] - Left\n\r";
 	char *	lpT2 = " [F2] - Right\n\r";
-	char *	lpT3 = " [F3] - Centre\n\r\n\r";
-	char *	lpQ  = " [Space] - Quit\n\r";
+	char *	lpT3 = " [F3] - Centre\n\r";
 
 
 	/* print information */
@@ -114,7 +120,22 @@ void	Menu_Print( void )
 	GemDos_Cconws( lpT1 );
 	GemDos_Cconws( lpT2 );
 	GemDos_Cconws( lpT3 );
-	GemDos_Cconws( lpQ );
+	GemDos_Cconws( " [F4] Pan Mode : " );
+	switch( gExampleMixerConfig.mPanType )
+	{
+	case eMixer_PanType_Linear:
+		GemDos_Cconws( "Linear" );
+		break;
+	case eMixer_PanType_ConstantPower:
+		GemDos_Cconws( "ConstantPower" );
+		break;
+	case eMixer_PanType_PanLaw:
+		GemDos_Cconws( "PanLaw" );
+	default:
+		break;
+	}
+
+	GemDos_Cconws( "\n\r\n\r [Space] - Quit\n\r" );
 
 }
 
@@ -131,17 +152,19 @@ void	Test_Loop( void )
 	sAudioDmaSound	lSound;
 
 	lSound.mBits = eAUDIO_BITS_8;
+	lSound.mLoopingFlag = 0;
 	lSound.mStereoFlag = 0;
 	lSound.mLength = File_GetSize(lpSampleFileName);
 	lSound.mpSound = File_Load(lpSampleFileName);
 
-	Menu_Print();
+	Audio_MaximiseVolumeSigned( &lSound );
 
 	/* loop until space pressed */
 	for(;;)
 	{
 		U8 lKey;
 		/* wait for key */
+		Menu_Print();
 		while( !IKBD_GetKbdBytesWaiting());
 		lKey = IKBD_PopKbdByte();
 
@@ -156,6 +179,13 @@ void	Test_Loop( void )
 		else if (eIKBDSCAN_F3 == lKey)
 		{
 			AudioMixer_PlaySample( &lSound, eAMIXER_PAN_CENTRE );
+		}
+		else if( eIKBDSCAN_F4 == lKey )
+		{
+			gExampleMixerConfig.mPanType++;
+			if( gExampleMixerConfig.mPanType >= eMixer_PanType_Limit )
+				gExampleMixerConfig.mPanType = 0;
+			AudioMixer_SetConfig( &gExampleMixerConfig );
 		}
 		else if( eIKBDSCAN_SPACE == lKey )
 		{
