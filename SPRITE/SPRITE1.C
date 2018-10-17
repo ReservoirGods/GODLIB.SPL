@@ -1,7 +1,7 @@
 /*************************************************************************************
  * GodLib Example Progam Suite
  * 
- * Demonstrates basic screen functionality
+ * Demonstrates basic sprite functionality
  *
  * PINK 01.01.03
  *************************************************************************************
@@ -12,15 +12,12 @@
 ################################################################################### */
 
 #include	<GODLIB\GEMDOS\GEMDOS.H>
-#include	<GODLIB\GRAPHIC\GRAPHIC.H>
 #include	<GODLIB\FILE\FILE.H>
 #include	<GODLIB\IKBD\IKBD.H>
-#include	<GODLIB\MEMORY\MEMORY.H>
 #include	<GODLIB\PLATFORM\PLATFORM.H>
 #include	<GODLIB\PICTYPES\DEGAS.H>
 #include	<GODLIB\SCREEN\SCREEN.H>
 #include	<GODLIB\SPRITE\SPRITE.H>
-#include	<GODLIB\SYSTEM\SYSTEM.H>
 #include	<GODLIB\VBL\VBL.H>
 #include	<GODLIB\VIDEO\VIDEO.H>
 
@@ -75,132 +72,93 @@ S16	GodLib_Game_Main( S16 aArgCount, char * apArgs[] )
 void	Test_Loop( void )
 {
 	sGraphicPos		lPosSaved[ 2 ];
-
 	sGraphicPos		lPos;
 	sGraphicRect	lRect;
 	S16				lAddX,lAddY;
-	U16				lScreenIndex = 0;
 	sSprite *		lpSprite;
 	U16 *			lpMsk;
 
-	Screen_Init( 320, 200, eGRAPHIC_COLOURMODE_4PLANE, eSCREEN_SCROLL_NONE );
-
 	gpPicture = File_Load( "SPRITE.PI1" );
 
-	if( gpPicture )
+	if( !gpPicture )
 	{
-		Video_SetPalST( &gpPicture->mHeader.mPalette[ 0 ] );
+		printf( "couldn't find sprite file" );
+		GemDos_Cnecin();
+		return;
+	}
 
-		lPos.mX = 0;
-		lPos.mY = 0;
+	Screen_Init( 320, 200, eGRAPHIC_COLOURMODE_4PLANE, eSCREEN_SCROLL_NONE );
 
-		lPosSaved[ 0 ] = lPos;
-		lPosSaved[ 1 ] = lPos;
+	Video_SetPalST( &gpPicture->mHeader.mPalette[ 0 ] );
 
-		lAddX  = 1;
-		lAddY  = 1;
+	lPos.mX = 0;
+	lPos.mY = 0;
 
-		/* generate a mask for the sprite	*/
-		/* when using tools pipeline, this is generally done with the MASKMAKE tool, and the sprite is constructed with BSBMAKER */
+	lPosSaved[ 0 ] = lPos;
+	lPosSaved[ 1 ] = lPos;
 
-		lpMsk = Sprite_MaskCreate(
-			&gpPicture->mPixels[ 0 ],	/* source graphics */
-			16,	/* width */
-			16,	/* height */
-			4,	/* planes */
-			4,	/* mask planes */
-			0	/* opaque flag */
-			);
+	/* generate a mask for the sprite	*/
+	/* when using tools pipeline, this is generally done with the MASKMAKE tool, and the sprite is constructed with BSBMAKER */
 
-		lpSprite = Sprite_Create(
-			&gpPicture->mPixels[ 0 ],	/* source graphics */
-			lpMsk,	/* source mask */
-			16,	/* width */
-			16,	/* height */
-			4,	/* planes */
-			4,	/* mask planes */
-			0	/* opaque flag */
-			);
+	lpMsk = Sprite_MaskCreate(
+		&gpPicture->mPixels[ 0 ],	/* source graphics */
+		16,	/* width */
+		16,	/* height */
+		4,	/* planes */
+		4,	/* mask planes */
+		0	/* opaque flag */
+		);
 
-		Sprite_MaskDestroy( lpMsk );
+	lpSprite = Sprite_Create(
+		&gpPicture->mPixels[ 0 ],	/* source graphics */
+		lpMsk,	/* source mask */
+		16,	/* width */
+		16,	/* height */
+		4,	/* planes */
+		4,	/* mask planes */
+		0	/* opaque flag */
+		);
 
-		while( !IKBD_GetKeyStatus(eIKBDSCAN_SPACE) )
-		{
-			lScreenIndex ^= 1;
-			Screen_Update();
-			IKBD_Update();
+	Sprite_MaskDestroy( lpMsk );
 
+	lAddX = 1;
+	lAddY = 1;
+	while( !IKBD_GetKeyStatus(eIKBDSCAN_SPACE) )
+	{
+		Screen_Update();
+		IKBD_Update();
 
-			/* clear old sprite */
+		/* clear old sprite */
+		lRect.mX = lPosSaved[ Screen_GetLogicIndex() ].mX;
+		lRect.mY = lPosSaved[ Screen_GetLogicIndex() ].mY;
+		lRect.mWidth = 16;
+		lRect.mHeight = 16;
+		Screen_Logic_DrawBox_Clip( &lRect, 0 );
 
-			lRect.mX = lPosSaved[ lScreenIndex ].mX;
-			lRect.mY = lPosSaved[ lScreenIndex ].mY;
-			lRect.mWidth = 16;
-			lRect.mHeight = 16;
-			lPosSaved[ lScreenIndex ] = lPos;
-			Screen_GetpLogicGraphic()->mpClipFuncs->DrawBox( Screen_GetpLogicGraphic(), &lRect, 0 );
+		/* save current sprite position*/
+		lPosSaved[ Screen_GetLogicIndex() ] = lPos;
 
-#if 0
-			lRect.mY=0;
-			lRect.mWidth = 1;
-			lRect.mHeight = 200;
-			for( lRect.mX=0; lRect.mX<320; lRect.mX+=10 )
-			{
-				Screen_GetpLogicGraphic()->mpClipFuncs->DrawBox( Screen_GetpLogicGraphic(), &lRect, 2 );
-			}
-#endif 
-			/* draw new sprite */
+		/* draw new sprite to logical screen (backbuffer) */
+		Screen_Logic_DrawSprite_Clip( &lPos, lpSprite );
 
-			Screen_GetpLogicGraphic()->mpClipFuncs->DrawSprite(
-				Screen_GetpLogicGraphic(),
-				&lPos,
-				lpSprite );
+		/* calculate new sprite pos */
+		lPos.mX += lAddX;
 
+		if( lPos.mX >= (320-16) )
+			lAddX  = -1;
+		else if( lPos.mX < 0 )
+			lAddX  = 1;
 
-			/* calculate new sprite pos */
-			if( lAddX > 0 )
-			{
-				lPos.mX++;
-				if( lPos.mX > (320-16) )
-				{
-					lPos.mX = 320-16;
-					lAddX  = -1;
-				}
-			}
-			else
-			{
-				lPos.mX--;
-				if( lPos.mX < 0 )
-				{
-					lPos.mX = 0;
-					lAddX  = 1;
-				}
-			}
+		lPos.mY += lAddY;
 
-			if( lAddY > 0 )
-			{
-				lPos.mY++;
-				if( lPos.mY > (200-16) )
-				{
-					lPos.mY = 200-16;
-					lAddY  = -1;
-				}
-			}
-			else
-			{
-				lPos.mY--;
-				if( lPos.mY < 0 )
-				{
-					lPos.mY = 0;
-					lAddY  = 1;
-				}
-			}
-		}
+		if( lPos.mY >= (200-16) )
+			lAddY  = -1;
+		else if( lPos.mY < 0 )
+			lAddY  = 1;
 	}
 
 	File_UnLoad( gpPicture );
 }
-
 
 
 /* ################################################################################ */
