@@ -74,11 +74,8 @@ S16	GodLib_Game_Main( S16 aArgCount, char * apArgs[] )
 
 	Platform_DeInit();
 
-
 	return( 0 );
 }
-
-
 
 
 /*-----------------------------------------------------------------------------------*
@@ -91,7 +88,6 @@ void	Test_Loop( void )
 {
 	Screen_Init( 320, 200, eGRAPHIC_COLOURMODE_4PLANE, eSCREEN_SCROLL_NONE );
 	Video_SetPalST( &gMyPalette[ 0 ] );
-
 
 	while( !IKBD_GetKeyStatus(eIKBDSCAN_SPACE) )
 	{
@@ -119,11 +115,8 @@ void	Box_Render( void )
 	lRect.mWidth  = dBOX_WIDTH;
 	lRect.mHeight = dBOX_HEIGHT;
 
-	Screen_GetpLogicGraphic()->mpClipFuncs->DrawBox( 
-		Screen_GetpLogicGraphic(), 
-		&lRect, 
-		dBOX_COLOUR );
-
+	/* render box to logical screen */
+	Screen_Logic_DrawBox( &lRect, dBOX_COLOUR );
 }
 
 
