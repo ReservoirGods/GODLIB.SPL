@@ -28,7 +28,6 @@ void	Hardware_Init( void );
 void	Hardware_DeInit( void );
 
 void	Test_Loop( void );
-void	JagPad_PacketDisplay( const U8 aPacket );
 
 void	Screen_DrawBars( U16 * apScreen );
 
@@ -111,12 +110,15 @@ void	Test_Loop( void )
 	void *	lpScreenMem;
 	U16 *	lpPhysic;
 
+	/* set to a 320x200 16 colour screen*/
 	Video_SetResolution( 320, 200, eGRAPHIC_COLOURMODE_4PLANE, 320 );
 
+	/* allocate screen compatible memory*/
 	lpScreenMem = mMEMSCREENCALLOC( 32000L + 255L );
 
 	if( lpScreenMem )
 	{
+		/* all screen buffers have to be aligned to nearest 256 bytes*/
 		lBase       = (U32)lpScreenMem;
 		lBase       += 255L;
 		lBase      &= 0xFFFFFF00L;
@@ -127,6 +129,7 @@ void	Test_Loop( void )
 		Screen_DrawBars( lpPhysic );
 		Video_SetPhysic( lpPhysic );
 
+		/* wait for space to be pressed */
 		while( !IKBD_GetKeyStatus(eIKBDSCAN_SPACE) )
 		{
 			IKBD_Update();
@@ -150,18 +153,11 @@ void	Screen_DrawBars( U16 * apScreen )
 	for( i=0; i<16000; i++ )
 	{
 		if( i & 8 )
-		{
 			apScreen[ i ] = 0xFFFF;
-		}
 		else
-		{
 			apScreen[ i ] = 0;
-		}
 	}
-
 }
-
-
 
 
 
