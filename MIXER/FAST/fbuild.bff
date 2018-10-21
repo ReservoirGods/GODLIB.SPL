@@ -1,2 +1,18 @@
 .ProjectName="MIXER"
-#include "..\..\sample.bff"
+
+#include "..\..\..\GODLIB\FAST\head.bff"
+
+.ProjectOptions_Base =
+[
+	Using( .ProjectOptions_Win_Base )
+	.CompilerOptions	+ ' /D dAUDIO_MIXER=1'
+						+ ' /D dGODLIB_AUDIO_MIXER=1'
+						+ ' /D dCLI=1'
+						+ ' /D dEXCEPTION_SCREEN'
+						+ ' /D dGODLIB_FADE'
+						+ ' /D dSCREENGRAB'
+						+ ' /D dLINKFILE'
+						+ ' /D dGODLIB_PACKAGEMANGER'
+]
+#include    "$GodLibDir$\FAST\Base.bff"
+#include    "$GodLibDir$\FAST\Combine.bff"
