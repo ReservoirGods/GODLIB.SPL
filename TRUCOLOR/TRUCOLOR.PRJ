@@ -1,0 +1,117 @@
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	GODVIEW TOOL
+;
+;	Expected folder structure:
+;   |
+;	..\GODLIB
+;	..\TOOLS.RG
+;	..\GODLIB.SPL\GODVIEW\GODVIEW.PRJ
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	SPECIAL OPTIONS FOR PUREBOT
+;:-B=ANIM8R.LOG
+; -V
+;:.C[ -NOUT ]
+;:.S[ -NOUT ]
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	OUTPUT FILENAME
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+TRUCOLOR.TOS
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	OPTIONS
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.C [ -G -M -P -W-par -I..\..\TOOLS.RG\PURE_C\INCLUDE -I..\.. ]
+.C [ -DdGODLIB_16BPP ]
+.L [ -F -G ]
+.S [ -1 -2 -S -Y -NOUT ]
+
+=
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	STARTUP MODULE
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+..\..\TOOLS.RG\PURE_C\LIB\PCSTART.O
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	GODLIB LIBRARY MODULES (C)
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+..\..\GODLIB\ASSET\ASSET.C
+..\..\GODLIB\ASSET\CONTEXT.C
+..\..\GODLIB\ASSET\PACKAGE.C
+..\..\GODLIB\ASSET\PKG_DIR.C
+..\..\GODLIB\ASSET\PKG_LNK.C
+..\..\GODLIB\ASSET\RELOCATE.C
+..\..\GODLIB\AUDIO\AUDIO.C
+..\..\GODLIB\BASE\BASE.C
+..\..\GODLIB\BLITTER\BLITTER.C
+..\..\GODLIB\CLOCK\CLOCK.C
+..\..\GODLIB\COOKIE\COOKIE.C
+..\..\GODLIB\DRIVE\DRIVE.C
+..\..\GODLIB\FADE\FADE.C
+..\..\GODLIB\FILE\FILE.C
+..\..\GODLIB\FILE\FILE_PTN.C
+..\..\GODLIB\FONT\FONT.C
+..\..\GODLIB\GRAPHIC\GRAPHIC.C
+..\..\GODLIB\GEMDOS\GEMDOS.C
+..\..\GODLIB\IKBD\IKBD.C
+..\..\GODLIB\INPUT\INPUT.C
+..\..\GODLIB\KERNEL\KERNEL.C
+..\..\GODLIB\LINKFILE\LINKFILE.C
+..\..\GODLIB\MAIN\GOD_MAIN.C
+..\..\GODLIB\MEMORY\MEMORY.C
+..\..\GODLIB\MFP\MFP.C
+..\..\GODLIB\PACKER\GODPACK.C
+..\..\GODLIB\PACKER\PACKER.C
+..\..\GODLIB\PLATFORM\PLATFORM.C
+..\..\GODLIB\RANDOM\RANDOM.C
+..\..\GODLIB\SCREEN\SCREEN.C
+..\..\GODLIB\STRING\STRPATH.C
+..\..\GODLIB\SYSTEM\SYSTEM.C
+..\..\GODLIB\VBL\VBL.C
+..\..\GODLIB\VIDEO\VIDEO.C
+..\..\GODLIB\VIDEO\VIDEL.C
+..\..\GODLIB\XBIOS\XBIOS.C
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	GODLIB LIBRARY MODULES (ASM)
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+..\..\GODLIB\AUDIO\AUDIO_S.S
+..\..\GODLIB\GEMDOS\GEMDOS_S.S
+..\..\GODLIB\GRAPHIC\GRF_4_S.S
+..\..\GODLIB\GRAPHIC\GRF_16_S.S
+..\..\GODLIB\GRAPHIC\GRF_B4_S.S
+..\..\GODLIB\IKBD\IKBD_S.S
+..\..\GODLIB\MEMORY\MEMORY_S.S
+..\..\GODLIB\MFP\MFP_S.S
+..\..\GODLIB\PACKER\LZ77B_S.S
+..\..\GODLIB\PACKER\PACKER_S.S
+..\..\GODLIB\PACKER\RLE_S.S
+..\..\GODLIB\SYSTEM\SYSTEM_S.S
+..\..\GODLIB\VBL\VBL_S.S
+..\..\GODLIB\VECTOR\VECTOR_S.S
+..\..\GODLIB\VIDEO\VIDEO_S.S
+..\..\GODLIB\XBIOS\XBIOS_S.S
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	MAIN CODE
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+TRUCOLOR.C
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;	PURE C LIBRARIES
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+..\..\TOOLS.RG\PURE_C\LIB\PCSTDLIB.LIB       ; standard library
+
+;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
