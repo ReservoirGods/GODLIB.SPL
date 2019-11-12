@@ -22,7 +22,7 @@
         {
             "label": "build sln",
             "type": "shell",
-            "command": "build.bat",
+            "command": "./build.bat",
             "args": [ "ExtraBuild" ],
             "group": {
                 "kind": "build",
